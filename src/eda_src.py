@@ -23,10 +23,7 @@ class EDA:
         try:
             # check the distribution of the classes except column Review and ID, make a pie chart in plotly
             data_utils = DataUtils()
-            train_data, test_data = data_utils.read_data(
-                train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\train.csv",
-                test_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\test.csv",
-            )
+            train_data, test_data = data_utils.read_data()
             # plot a pie chart in plotly for every column except Review and ID
             for column in train_data.columns:
                 if column not in ["Id", "Review"]:
@@ -47,11 +44,8 @@ class EDA:
         try:
             # cross tabulation for two columns in pandas
             data_utils = DataUtils()
-            train_data, test_data = data_utils.read_data(
-                train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\train.csv",
-                test_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\test.csv",
-            )
-            train_data
+            train_data, test_data = data_utils.read_data()
+            #train_data
             # cross tabulation for two columns in pandas
             pd.crosstab(
                 train_data["Components"], train_data["Delivery and Customer Support"]
@@ -103,10 +97,7 @@ class EDA:
 
 if __name__ == "__main__":
     data_utils = DataUtils()
-    train_data, test_data = data_utils.read_data(
-        train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\train.csv",
-        test_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\test.csv",
-    )
+    train_data, test_data = data_utils.read_data()
     eda = EDA(train_data)
     eda.check_class_distributions()
     eda.cross_tabulation()

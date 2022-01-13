@@ -360,6 +360,9 @@ class DataDevelopment:
 
 
 if __name__ == "__main__":
+    data_utils = DataUtils()
+    train_data , test_data = data_utils.read_data()
+    
     # data_utils = DataUtils()
     # train_data, test_data = data_utils.read_data(
     #     train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\train.csv",
