@@ -45,24 +45,10 @@ class DataProcessing:
             self.train_data["Review"] = self.train_data["Review"].apply(
                 lambda x: self.remove_stopwords(x)
             )
-
             self.train_data["Review"] = self.train_data["Review"].apply(
                 lambda x: self.lemmatization(x)
             )
 
-            self.test_data["Review"] = self.test_data["Review"].apply(
-                lambda x: self.remove_numbers(x)
-            )
-
-            self.test_data["Review"] = self.test_data["Review"].apply(
-                lambda x: self.remove_short_words(x)
-            )
-            self.test_data["Review"] = self.test_data["Review"].apply(
-                lambda x: self.remove_stopwords(x)
-            )
-            self.test_data["Review"] = self.test_data["Review"].apply(
-                lambda x: self.lemmatization(x)
-            )
             return self.train_data, self.test_data
 
         except Exception as e:
@@ -73,7 +59,8 @@ class DataProcessing:
             return None
 
     def Review_processing(self, Review):
-        logging.info("Applying Review processing methods on train and test data")
+        logging.info(
+            "Applying Review processing methods on train and test data")
         try:
             Review = Review.lower()
             Review = Review.replace("\n", " ")
@@ -101,7 +88,8 @@ class DataProcessing:
             Review = [ps.stem(word) for word in Review]
             Review = " ".join(Review)
         except Exception as e:
-            logging.error("Error in applying stemming methods on train and test data")
+            logging.error(
+                "Error in applying stemming methods on train and test data")
             logging.error(e)
             return None
         return Review
@@ -163,11 +151,11 @@ class DataProcessing:
         Review = " ".join(Review)
         return Review
 
-    def remove_nan_values(self, df): 
-        # fill nan values with UNKOWN and return the dataframe 
-        df = df.fillna("UNKOWN")     
-        return df 
- 
+    def remove_nan_values(self, df):
+        # fill nan values with UNKOWN and return the dataframe
+        df = df.fillna("UNKNOWN", inplace=True)
+        return df
+
 
 class DataDevelopment:
     def __init__(self) -> None:
@@ -361,8 +349,8 @@ class DataDevelopment:
 
 if __name__ == "__main__":
     data_utils = DataUtils()
-    train_data , test_data = data_utils.read_data()
-    
+    train_data, test_data = data_utils.read_data()
+
     # data_utils = DataUtils()
     # train_data, test_data = data_utils.read_data(
     #     train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\train.csv",
@@ -382,13 +370,13 @@ if __name__ == "__main__":
     #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_preprocessed.csv",
     #     index=False,
     # )
-    # # ==============================================================================   
-    # data_dev = DataDevelopment() 
+    # # ==============================================================================
+    # data_dev = DataDevelopment()
     # (
     #             x_train_component,
     #             x_test_component,
     #             y_train_component,
     #             y_test_component,
-    #         ) = data_dev.divide_data(df="df_componenet")  
-    # x_train_component 
-    pass 
+    #         ) = data_dev.divide_data(df="df_componenet")
+    # x_train_component
+    pass

@@ -9,8 +9,8 @@ from nltk import sent_tokenize, word_tokenize
 import gensim
 from data_ingestion import DataUtils
 from data_processing import DataProcessing
-from sklearn.feature_extraction.text import TfidfVectorizer 
-import joblib 
+from sklearn.feature_extraction.text import TfidfVectorizer
+import joblib
 
 
 class FeatureEngineering:
@@ -21,8 +21,10 @@ class FeatureEngineering:
     def get_count_of_words(self):
         # get count of words in train and test data
         logging.info("Get count of words in train and test data")
-        train_data_count = self.train_data["Review"].apply(lambda x: len(x.split()))
-        test_data_count = self.test_data["Review"].apply(lambda x: len(x.split()))
+        train_data_count = self.train_data["Review"].apply(
+            lambda x: len(x.split()))
+        test_data_count = self.test_data["Review"].apply(
+            lambda x: len(x.split()))
         return train_data_count, test_data_count
 
     def get_count_of_sentences(self):
@@ -91,10 +93,12 @@ class FeatureEngineering:
         # train a gensim model
         logging.info("Train a gensim model")
 
-        review_text = self.train_data.Review.apply(gensim.utils.simple_preprocess)
+        review_text = self.train_data.Review.apply(
+            gensim.utils.simple_preprocess)
         model = gensim.models.Word2Vec(window=10, min_count=2, workers=4)
         model.build_vocab(review_text, progress_per=1000)
-        model.train(review_text, total_examples=model.corpus_count, epochs=model.epochs)
+        model.train(review_text, total_examples=model.corpus_count,
+                    epochs=model.epochs)
         model.save(r"E:\Hackathon\UGAM\src\saved_model\ugam_reviews.model")
         return model
 
@@ -203,12 +207,12 @@ class FeatureEngineering:
 
         return self.train_data, self.test_data
 
+
 class Vectorization:
-    def __init__(self, train_data, test_data) -> None: 
+    def __init__(self, train_data, test_data) -> None:
         self.train_data = train_data
-        self.test_data = test_data 
-    
-         
+        self.test_data = test_data
+
     def extract_features(self):
         vectorizer = TfidfVectorizer()
         self.train_data["Review"].head()
@@ -237,9 +241,11 @@ class Vectorization:
         print(Final_Training_data.shape)
         Final_Training_data.drop(["Review"], axis=1, inplace=True)
         Final_Training_data.head()
-        Final_Training_data.to_csv("Final_Training_vectorized.csv", index=False)
+        Final_Training_data.to_csv(
+            "Final_Training_vectorized.csv", index=False)
 
-        dff_test = list(vectorizer.transform(self.test_data["Review"]).toarray())
+        dff_test = list(vectorizer.transform(
+            self.test_data["Review"]).toarray())
         vocab_test = vectorizer.vocabulary_
         keys_test = list(vocab_test.keys())
         dff_test_df = pd.DataFrame(dff_test, columns=keys_test)
@@ -247,18 +253,19 @@ class Vectorization:
         self.test_data.reset_index(drop=True, inplace=True)
         Final_Test = pd.concat([self.test_data, dff_test_df], axis=1)
         Final_Test.drop(["Review"], axis=1, inplace=True)
-        Final_Test.to_csv("Final_Test_vectorized", index=False)
+        Final_Test.to_csv("Final_Test_vectorized.csv", index=False)
 
         # save the vectorizer to disk
         joblib.dump(vectorizer, "vectorizer.pkl")
         return Final_Training_data, Final_Test
 
-    def extract_features_most_similar_words(self): 
+    def extract_features_most_similar_words(self):
         vectorizer = TfidfVectorizer()
         self.train_data["most_similar_words"].head()
 
         extracted_data = list(
-            vectorizer.fit_transform(self.train_data["most_similar_words"]).toarray()
+            vectorizer.fit_transform(
+                self.train_data["most_similar_words"]).toarray()
         )
         extracted_data = pd.DataFrame(extracted_data)
         extracted_data.head()
@@ -281,9 +288,11 @@ class Vectorization:
         print(Final_Training_data.shape)
         Final_Training_data.drop(["most_similar_words"], axis=1, inplace=True)
         Final_Training_data.head()
-        Final_Training_data.to_csv("Final_Training_vectorized_SimilarFeatures.csv", index=False)
+        Final_Training_data.to_csv(
+            "Final_Training_vectorized_SimilarFeatures.csv", index=False)
 
-        dff_test = list(vectorizer.transform(self.test_data["most_similar_words"]).toarray())
+        dff_test = list(vectorizer.transform(
+            self.test_data["most_similar_words"]).toarray())
         vocab_test = vectorizer.vocabulary_
         keys_test = list(vocab_test.keys())
         dff_test_df = pd.DataFrame(dff_test, columns=keys_test)
@@ -291,19 +300,21 @@ class Vectorization:
         self.test_data.reset_index(drop=True, inplace=True)
         Final_Test = pd.concat([self.test_data, dff_test_df], axis=1)
         Final_Test.drop(["most_similar_words"], axis=1, inplace=True)
-        Final_Test.to_csv("Final_Test_vectorized_SimilarFeatures.csv", index=False)
+        Final_Test.to_csv(
+            "Final_Test_vectorized_SimilarFeatures.csv", index=False)
 
         # save the vectorizer to disk
         joblib.dump(vectorizer, "vectorizer_similarFeatures.pkl")
-        return Final_Training_data, Final_Test      
+        return Final_Training_data, Final_Test
+
 
 if __name__ == "__main__":
     data_utils = DataUtils()
     train_data, test_data = data_utils.read_data(
         train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed.csv",
         test_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed.csv",
-    ) 
-    
+    )
+
     feature_engineering_obj = FeatureEngineering(train_data, test_data)
     # model = feature_engineering_obj.train_a_gensim_model()
     # model.wv.most_similar("Key")
@@ -342,4 +353,3 @@ if __name__ == "__main__":
         r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed_with_features.csv",
         index=False,
     )
-
