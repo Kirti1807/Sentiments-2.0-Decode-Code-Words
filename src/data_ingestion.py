@@ -7,10 +7,10 @@ class DataUtils:
     def __init__(self) -> None:
         pass
 
-    def read_data(self):
+    def read_data(self, train_path, test_path):
         logging.info("Reading training and testing data")
-        train_data = pd.read_csv(r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\data\trainmulticlass.csv")
-        test_data = pd.read_csv(r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\data\testmulticlass.csv")
+        train_data = pd.read_csv(train_path)
+        test_data = pd.read_csv(test_path)
         logging.info("Data read successfully")
         return train_data, test_data
 
@@ -154,7 +154,7 @@ class DataUtils:
 
 if __name__ == "__main__":
     data_utils = DataUtils()
-    train_data , test_data = data_utils.read_data()
+    train_data, test_data = data_utils.read_data()
     print(train_data.head())
     print(train_data.shape)
     print(test_data.head())
