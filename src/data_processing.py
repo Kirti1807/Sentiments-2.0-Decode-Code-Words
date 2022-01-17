@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 
 
 class DataProcessing:
-    def __init__(self, test_data, train_data) -> None:
+    def __init__(self, train_data, test_data) -> None:
         self.test_data = test_data
         self.train_data = train_data
 
@@ -30,25 +30,52 @@ class DataProcessing:
             self.train_data["Review"] = self.train_data["Review"].apply(
                 lambda x: self.Review_processing(x)
             )
-            self.train_data["Review"] = self.train_data["Review"].apply(
-                lambda x: self.remove_punctuation(x)
-            )
-            self.train_data["Review"] = self.train_data["Review"].apply(
-                lambda x: self.remove_numbers(x)
-            )
+            # self.train_data["Review"] = self.train_data["Review"].apply(
+            #     lambda x: self.remove_punctuation(x)
+            # )
+            # self.train_data["Review"] = self.train_data["Review"].apply(
+            #     lambda x: self.remove_numbers(x)
+            # )
             self.train_data["Review"] = self.train_data["Review"].apply(
                 lambda x: self.remove_special_characters(x)
             )
             self.train_data["Review"] = self.train_data["Review"].apply(
                 lambda x: self.remove_short_words(x)
             )
+            # self.train_data["Review"] = self.train_data["Review"].apply(
+            #     lambda x: self.remove_stopwords(x)
+            # )
             self.train_data["Review"] = self.train_data["Review"].apply(
-                lambda x: self.remove_stopwords(x)
+                lambda x: self.remove_stopwords_and_punctuation_and_numbers(x)
             )
             self.train_data["Review"] = self.train_data["Review"].apply(
                 lambda x: self.lemmatization(x)
             )
 
+<<<<<<< HEAD
+            # self.test_data["Review"] = self.test_data["Review"].apply(
+            #     lambda x: self.remove_numbers(x)
+            # )
+            self.test_data["Review"] = self.test_data["Review"].apply(
+                lambda x: self.Review_processing(x)
+            )
+            self.test_data["Review"] = self.test_data["Review"].apply(
+                lambda x: self.remove_stopwords_and_punctuation_and_numbers(x)
+            )
+            self.test_data["Review"] = self.test_data["Review"].apply(
+                lambda x: self.remove_short_words(x)
+            )
+            self.test_data["Review"] = self.test_data["Review"].apply(
+                lambda x: self.remove_special_characters(x)
+            )
+            # self.test_data["Review"] = self.test_data["Review"].apply(
+            #     lambda x: self.remove_stopwords(x)
+            # )
+            self.test_data["Review"] = self.test_data["Review"].apply(
+                lambda x: self.lemmatization(x)
+            )
+=======
+>>>>>>> 20e9a13af0e0e38d7e096f7f4cd6fc4baeffd8d2
             return self.train_data, self.test_data
 
         except Exception as e:
@@ -113,7 +140,6 @@ class DataProcessing:
         Review = Review.split()
         Review = [word for word in Review if word.isalpha()]
         Review = " ".join(Review)
-
         return Review
 
     def remove_numbers(self, Review):
@@ -153,7 +179,11 @@ class DataProcessing:
 
     def remove_nan_values(self, df):
         # fill nan values with UNKOWN and return the dataframe
+<<<<<<< HEAD
+        df = df.fillna("UNKNOWN")
+=======
         df = df.fillna("UNKNOWN", inplace=True)
+>>>>>>> 20e9a13af0e0e38d7e096f7f4cd6fc4baeffd8d2
         return df
 
 

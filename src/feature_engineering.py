@@ -11,6 +11,7 @@ from data_ingestion import DataUtils
 from data_processing import DataProcessing
 from sklearn.feature_extraction.text import TfidfVectorizer
 import joblib
+from gensim.models.fasttext import FastText
 
 
 class FeatureEngineering:
@@ -99,7 +100,9 @@ class FeatureEngineering:
         model.build_vocab(review_text, progress_per=1000)
         model.train(review_text, total_examples=model.corpus_count,
                     epochs=model.epochs)
-        model.save(r"E:\Hackathon\UGAM\src\saved_model\ugam_reviews.model")
+        # model.save(r"E:\Hackathon\UGAM\src\saved_model\ugam_reviews.model")
+        # model.save(r"ugam_reviews.model")
+
         return model
 
     def get_word_embeddings(self, model):
@@ -110,7 +113,7 @@ class FeatureEngineering:
 
     def get_similar(self, word, model):
         if word in model.wv:
-            return model.wv.most_similar(word)[0]  # try runnign again
+            return model.wv.most_similar(word)[0][0]  # try runnign again
         else:
             return None
 
@@ -196,12 +199,8 @@ class FeatureEngineering:
         self.test_data["average_word_length"] = test_data_average_word_length
         self.train_data["average_sentence_length"] = train_data_average_sentence_length
         self.test_data["average_sentence_length"] = test_data_average_sentence_length
-        self.train_data[
-            "average_sentence_complexity"
-        ] = train_data_average_sentence_complexity
-        self.test_data[
-            "average_sentence_complexity"
-        ] = test_data_average_sentence_complexity
+        self.train_data["average_sentence_complexity"] = train_data_average_sentence_complexity
+        self.test_data["average_sentence_complexity"] = test_data_average_sentence_complexity
         self.train_data["average_word_complexity"] = train_data_average_word_complexity
         self.test_data["average_word_complexity"] = test_data_average_word_complexity
 
@@ -213,51 +212,90 @@ class Vectorization:
         self.train_data = train_data
         self.test_data = test_data
 
-    def extract_features(self):
-        vectorizer = TfidfVectorizer()
-        self.train_data["Review"].head()
+    # def tfidf_extract_features(self):
+    #     vectorizer = TfidfVectorizer()
+    #     self.train_data["Review"].head()
 
-        extracted_data = list(
-            vectorizer.fit_transform(self.train_data["Review"]).toarray()
-        )
-        extracted_data = pd.DataFrame(extracted_data)
-        extracted_data.head()
-        extracted_data.columns = vectorizer.get_feature_names()
+    #     extracted_data = list(
+    #         vectorizer.fit_transform(self.train_data["Review"]).toarray()
+    #     )
+    #     extracted_data = pd.DataFrame(extracted_data)
+    #     extracted_data.head()
+    #     extracted_data.columns = vectorizer.get_feature_names()
 
-        vocab = vectorizer.vocabulary_
-        mapping = vectorizer.get_feature_names()
-        keys = list(vocab.keys())
+    #     vocab = vectorizer.vocabulary_
+    #     mapping = vectorizer.get_feature_names()
+    #     keys = list(vocab.keys())
 
-        extracted_data.shape
-        Modified_df = extracted_data.copy()
-        print(Modified_df.shape)
-        Modified_df.head()
-        Modified_df.reset_index(drop=True, inplace=True)
-        self.train_data.reset_index(drop=True, inplace=True)
+    #     extracted_data.shape
+    #     Modified_df = extracted_data.copy()
+    #     print(Modified_df.shape)
+    #     Modified_df.head()
+    #     Modified_df.reset_index(drop=True, inplace=True)
+    #     self.train_data.reset_index(drop=True, inplace=True)
 
-        Final_Training_data = pd.concat([self.train_data, Modified_df], axis=1)
+    #     Final_Training_data = pd.concat([self.train_data, Modified_df], axis=1)
 
-        Final_Training_data.head()
-        print(Final_Training_data.shape)
-        Final_Training_data.drop(["Review"], axis=1, inplace=True)
-        Final_Training_data.head()
-        Final_Training_data.to_csv(
-            "Final_Training_vectorized.csv", index=False)
+    #     Final_Training_data.head()
+    #     print(Final_Training_data.shape)
+    #     Final_Training_data.drop(["Review"], axis=1, inplace=True)
+    #     Final_Training_data.head()
+    #     Final_Training_data.to_csv(
+    #         "Final_Training_vectorized.csv", index=False)
 
-        dff_test = list(vectorizer.transform(
-            self.test_data["Review"]).toarray())
-        vocab_test = vectorizer.vocabulary_
-        keys_test = list(vocab_test.keys())
-        dff_test_df = pd.DataFrame(dff_test, columns=keys_test)
-        dff_test_df.reset_index(drop=True, inplace=True)
-        self.test_data.reset_index(drop=True, inplace=True)
-        Final_Test = pd.concat([self.test_data, dff_test_df], axis=1)
-        Final_Test.drop(["Review"], axis=1, inplace=True)
-        Final_Test.to_csv("Final_Test_vectorized.csv", index=False)
+    #     dff_test = list(vectorizer.transform(
+    #         self.test_data["Review"]).toarray())
+    #     vocab_test = vectorizer.vocabulary_
+    #     keys_test = list(vocab_test.keys())
+    #     dff_test_df = pd.DataFrame(dff_test, columns=keys_test)
+    #     dff_test_df.reset_index(drop=True, inplace=True)
+    #     self.test_data.reset_index(drop=True, inplace=True)
+    #     Final_Test = pd.concat([self.test_data, dff_test_df], axis=1)
+    #     Final_Test.drop(["Review"], axis=1, inplace=True)
+    #     Final_Test.to_csv("Final_Test_vectorized.csv", index=False)
 
-        # save the vectorizer to disk
-        joblib.dump(vectorizer, "vectorizer.pkl")
-        return Final_Training_data, Final_Test
+    #     # save the vectorizer to disk
+    #     joblib.dump(vectorizer, "vectorizer.pkl")
+    #     return Final_Training_data, Final_Test
+
+    def fast_text_extract_features(self):
+        # self.train_data["Review"]
+        def averaged_word2vec_vectorizer(corpus, model, num_features):
+            vocabulary = set(model.wv.index_to_key)
+
+            def average_word_vectors(words, model, vocabulary, num_features):
+                feature_vector = np.zeros((num_features,), dtype="float64")
+                nwords = 0.
+
+                for word in words:
+                    if word in vocabulary:
+                        nwords = nwords + 1.
+                        feature_vector = np.add(feature_vector, model.wv[word])
+                if nwords:
+                    feature_vector = np.divide(feature_vector, nwords)
+
+                return feature_vector
+            features = [average_word_vectors(tokenized_sentence, model, vocabulary, num_features)
+                        for tokenized_sentence in corpus]
+            return np.array(features)
+
+        # ft_model = FastText.load("ft_model")
+
+        tokenized_docs_train = [doc.split()
+                                for doc in list(self.train_data['Review'])]
+        ft_model = FastText(tokenized_docs_train, min_count=2,
+                            vector_size=300, workers=4, window=40, sg=1, epochs=100)
+        doc_vecs_ft_train = averaged_word2vec_vectorizer(
+            tokenized_docs_train, ft_model, 300)
+        doc_vecs_ft_train = pd.DataFrame(doc_vecs_ft_train)
+
+        tokenized_docs_test = [doc.split()
+                               for doc in list(self.test_data['Review'])]
+        doc_vecs_ft_test = averaged_word2vec_vectorizer(
+            tokenized_docs_test, ft_model, 300)
+        doc_vecs_ft_test = pd.DataFrame(doc_vecs_ft_test)
+        ft_model.save("ft_model")
+        return doc_vecs_ft_train, doc_vecs_ft_test
 
     def extract_features_most_similar_words(self):
         vectorizer = TfidfVectorizer()
@@ -309,25 +347,31 @@ class Vectorization:
 
 
 if __name__ == "__main__":
-    data_utils = DataUtils()
-    train_data, test_data = data_utils.read_data(
-        train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed.csv",
-        test_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed.csv",
-    )
+    pass
+    # data_utils = DataUtils()
+    # train_data, test_data = data_utils.read_data(
+    #     train_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed.csv",
+    #     test_path=r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed.csv",
+    # )
 
-    feature_engineering_obj = FeatureEngineering(train_data, test_data)
+    # feature_engineering_obj = FeatureEngineering(train_data, test_data)
+    # feature_engineering_obj = FeatureEngineering(dummy_train, dummy_test)
+
     # model = feature_engineering_obj.train_a_gensim_model()
-    # model.wv.most_similar("Key")
+    # model.wv.most_similar("good")
 
     # train_data, test_data = feature_engineering_obj.make_acolumn(model)
-    # test_data.to_csv(
-    #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words.csv",
-    #     index=False,
-    # )
-    # train_data.to_csv(
-    #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words.csv",
-    #     index=False,
-    # )
+    # # test_data.to_csv(
+    # #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words.csv",
+    # #     index=False,
+    # # )
+    # # train_data.to_csv(
+    # #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words.csv",
+    # #     index=False,
+    # # )
+    # train_data["most_similar_words"]
+    # train_data["most_similar_words"]=train_data["most_similar_words"].apply(str)
+    # test_data["most_similar_words"]=test_data["most_similar_words"].apply(str)
 
     # train_data["most_similar_words"] = train_data["most_similar_words"].apply(
     #     lambda x: feature_engineering_obj.process_most_similar_words(x)
@@ -335,21 +379,21 @@ if __name__ == "__main__":
     # test_data["most_similar_words"] = test_data["most_similar_words"].apply(
     #     lambda x: feature_engineering_obj.process_most_similar_words(x)
     # )
+    # # train_data.to_csv(
+    # #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed.csv",
+    # #     index=False,
+    # # )
+    # # test_data.to_csv(
+    # #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed.csv",
+    # #     index=False,
+    # # )
+
+    # train_data, test_data = feature_engineering_obj.add_features()
     # train_data.to_csv(
-    #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed.csv",
+    #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed_with_features.csv",
     #     index=False,
     # )
     # test_data.to_csv(
-    #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed.csv",
+    #     r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed_with_features.csv",
     #     index=False,
-    # )
-
-    train_data, test_data = feature_engineering_obj.add_features()
-    train_data.to_csv(
-        r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\train_data_with_most_similar_words_processed_with_features.csv",
-        index=False,
-    )
-    test_data.to_csv(
-        r"E:\Hackathon\UGAM\Participants_Data_DCW\processed_data\test_data_with_most_similar_words_processed_with_features.csv",
-        index=False,
-    )
+    # ).
