@@ -1,157 +1,211 @@
 import numpy as np
 import pandas as pd
 import logging
-
+from application_logger import CustomApplicationLogger
 
 class DataUtils:
     def __init__(self) -> None:
-        pass
+        self.file_object = open(
+            r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\logs\DataIngestionLogs.txt",
+            "a+",
+        )
+        self.logging = CustomApplicationLogger()
+        
 
     def read_data(self, train_path, test_path):
-        logging.info("Reading training and testing data")
-        train_data = pd.read_csv(train_path)
-        test_data = pd.read_csv(test_path)
-        logging.info("Data read successfully")
-        return train_data, test_data
+        self.logging.log(
+            self.file_object,
+            "In read_data method in DataUtils class : Started data loading"
+        )
+        try:
 
-    # def divide_data_in_divisions(self):
-    #     logging.info("Divide data into divisions")
-    #     try:
-    #         train_data, test_data = self.read_data(
-    #             train_path=r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\data\trainmulticlass.csv",
-    #             test_path=r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\data\testmulticlass.csv",
-    #         )
-    #         # select ID, Review, Component columns
-    #         last7cols = train_data.iloc[:, -7:]
+            train_data = pd.read_csv(train_path)
+            test_data = pd.read_csv(test_path)
+            self.logging.log(
+                self.file_object,
+                "In read_data method in DataUtils class : Data read successfully"
+            )
+            return train_data, test_data
+        except Exception as e:
+            self.logging.log(
+                self.file_object,
+                f"In read_data method in DataUtils class : Error in loading data: {e}",
+            )
+            raise e
+    
+    def divide_data_in_divisions(self , features , target):
+        self.logging.log(
+            self.file_object,
+            "In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset"
+        )
+        try:
+            df_Components = pd.concat([features , target["Components"]] , axis=1)
+            df_Components.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\df_Components.csv",
+                index=False)
 
-    #         logging.info("Dividing data into 12 divisions")
-    #         df_componenet = pd.concat(
-    #             [train_data[["Review", "Components"]], last7cols], axis=1
-    #         )
-    #         df_DeliveryandCustomerSupport = pd.concat(
-    #             [train_data[["Review", "Delivery and Customer Support"]], last7cols],
-    #             axis=1,
-    #         )
-    #         df_DesignandAesthetics = pd.concat(
-    #             [train_data[["Review", "Design and Aesthetics"]], last7cols], axis=1
-    #         )
-    #         df_Dimensions = pd.concat(
-    #             [train_data[["Review", "Dimensions"]], last7cols], axis=1
-    #         )
-    #         df_Features = pd.concat(
-    #             [train_data[["Review", "Features"]], last7cols], axis=1
-    #         )
-    #         df_Functionality = pd.concat(
-    #             [train_data[["Review", "Functionality"]], last7cols], axis=1
-    #         )
-    #         df_Installation = pd.concat(
-    #             [train_data[["Review", "Installation"]], last7cols], axis=1
-    #         )
-    #         df_Material = pd.concat(
-    #             [train_data[["Review", "Material"]], last7cols], axis=1
-    #         )
-    #         df_Quality = pd.concat(
-    #             [train_data[["Review", "Quality"]], last7cols], axis=1
-    #         )
-    #         df_Price = pd.concat([train_data[["Review", "Price"]], last7cols], axis=1)
-    #         df_Usability = pd.concat(
-    #             [train_data[["Review", "Usability"]], last7cols], axis=1
-    #         )
-    #         df_Polarity = pd.concat(
-    #             [train_data[["Review", "Polarity"]], last7cols], axis=1
-    #         )
+            df_DeliveryandCustomerSupport = pd.concat([features , target["Delivery and Customer Support"]], axis=1)
+            df_DeliveryandCustomerSupport.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\DeliveryandCustomerSupport.csv",
+                index=False)
 
-    #         logging.info("Data divided successfully")
+            df_DesignAndAesthetics = pd.concat([features , target["Design and Aesthetics"]], axis=1)
+            df_DesignAndAesthetics.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\DesignAndAesthetics.csv",
+                index=False)
+            
+            df_Dimensions = pd.concat([features , target["Dimensions"]], axis=1)
+            df_Dimensions.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Dimensions.csv",
+                index=False)
 
-    #         return (
-    #             df_componenet,
-    #             df_DeliveryandCustomerSupport,
-    #             df_DesignandAesthetics,
-    #             df_Dimensions,
-    #             df_Features,
-    #             df_Functionality,
-    #             df_Installation,
-    #             df_Material,
-    #             df_Price,
-    #             df_Quality,
-    #             df_Usability,
-    #             df_Polarity,
-    #         )
-    #         # convert every df in csv file
-    #         # for df in df_list:
-    #         #     df.to_csv(
-    #         #         r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisons{}.csv".format(
-    #         #             df.columns[2]
-    #         #         ),
-    #         #         index=False,
-    #         #     )
+            df_Features = pd.concat([features , target["Features"]], axis=1)
+            df_Features.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Features.csv",
+                index=False)
 
-    #         logging.info("Data divided successfully")
+            df_Functionality = pd.concat([features , target["Functionality"]], axis=1)
+            df_Functionality.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Functionality.csv",
+                index=False)
 
-    #     except Exception as e:
-    #         logging.error("Error while dividing data")
-    #         logging.error(e)
+            df_Installation = pd.concat([features , target["Installation"]], axis=1)
+            df_Installation.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Installation.csv",
+                index=False)
 
-    # def load_different_divisions_data(self):
-    #     logging.info("Loading data from different divisions")
-    #     try:
-    #         logging.info("Loading data from different divisions")
-    #         df_componenet = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsComponents.csv"
-    #         )
-    #         df_DeliveryandCustomerSupport = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsDelivery and Customer Support.csv"
-    #         )
-    #         df_Designand_Aesthetics = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsDesign and Aesthetics.csv"
-    #         )
-    #         df_Dimensions = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsDimensions.csv"
-    #         )
-    #         df_Features = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsFeatures.csv"
-    #         )
-    #         df_Functionality = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsFunctionality.csv"
-    #         )
-    #         df_Installation = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsInstallation.csv"
-    #         )
-    #         df_Material = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsMaterial.csv"
-    #         )
-    #         df_Price = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsPrice.csv"
-    #         )
-    #         df_Quality = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsQuality.csv"
-    #         )
-    #         df_Usability = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsUsability.csv"
-    #         )
-    #         df_Polarity = pd.read_csv(
-    #             r"E:\Hackathon\UGAM\Participants_Data_DCW\data_divisons\data_divisonsPolarity.csv"
-    #         )
-    #         logging.info("Data loaded successfully")
-    #         return (
-    #             df_componenet,
-    #             df_DeliveryandCustomerSupport,
-    #             df_Designand_Aesthetics,
-    #             df_Dimensions,
-    #             df_Features,
-    #             df_Functionality,
-    #             df_Installation,
-    #             df_Material,
-    #             df_Price,
-    #             df_Quality,
-    #             df_Usability,
-    #             df_Polarity,
-    #         )
-    #     except Exception as e:
-    #         logging.error("Error while loading data")
-    #         logging.error(e)
+            df_Material = pd.concat([features , target["Material"]], axis=1)
+            df_Material.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Material.csv",
+                index=False)
 
+            df_Price = pd.concat([features , target["Price"]], axis=1)
+            df_Price.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Price.csv",
+                index=False)
 
+            df_Quality = pd.concat([features , target["Quality"]], axis=1)
+            df_Quality.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Quality.csv",
+                index=False)
+
+            df_Usability = pd.concat([features , target["Usability"]], axis=1)
+            df_Usability.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Usability.csv",
+                index=False)
+
+            df_Polarity = pd.concat([features , target["Polarity"]], axis=1)
+            df_Polarity.to_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Polarity.csv",
+                index=False)
+            
+            self.logging.log(
+                self.file_object,
+                "In divide_data_in_divisions method in DataUtils class: Completed data divison"
+            )
+            
+            return (
+                df_Components,
+                df_DeliveryandCustomerSupport,
+                df_DesignAndAesthetics,
+                df_Dimensions,
+                df_Features,
+                df_Functionality,
+                df_Installation,
+                df_Material,
+                df_Price,
+                df_Quality,
+                df_Usability,
+                df_Polarity
+            )
+        except Exception as e:
+            self.logging.log(
+                self.file_object,
+                f"In divide_data_in_divisions method in DataUtils class: Error in data divison: {e}"
+            )
+            raise e
+
+    def load_different_divisions_data(self):
+        self.logging.log(
+            self.file_object,
+            "In load_different_divisions_data method in DataUtils class: started loading 12 datasets"
+        )
+        try:
+            df_Components = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\df_Components.csv"
+                )
+
+            df_DeliveryandCustomerSupport = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\DeliveryandCustomerSupport.csv"
+                )
+
+            df_DesignAndAesthetics = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\DesignAndAesthetics.csv"
+                )
+            
+            df_Dimensions = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Dimensions.csv"
+                )
+
+            df_Features = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Features.csv"
+                )
+
+            df_Functionality = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Functionality.csv"
+                )
+
+            df_Installation = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Installation.csv"
+                )
+
+            df_Material = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Material.csv"
+                )
+
+            df_Price = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Price.csv"
+                )
+
+            df_Quality = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Quality.csv"
+                )
+
+            df_Usability = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Usability.csv"
+                )
+
+            df_Polarity = pd.read_csv(
+                r"D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\divided_dataset\Polarity.csv"
+                )
+            
+            self.logging.log(
+                self.file_object,
+                r"In load_different_divisions_data method in DataUtils class: Completed loading 12 datasets"
+            )
+            
+            return (
+                df_Components,
+                df_DeliveryandCustomerSupport,
+                df_DesignAndAesthetics,
+                df_Dimensions,
+                df_Features,
+                df_Functionality,
+                df_Installation,
+                df_Material,
+                df_Price,
+                df_Quality,
+                df_Usability,
+                df_Polarity
+            )
+        except Exception as e:
+            self.logging.log(
+                self.file_object,
+                f"In divide_data_in_divisions method in DataUtils class: Error in data divison: {e}"
+            )
+            raise e
+
+    
 if __name__ == "__main__":
     data_utils = DataUtils()
     train_data, test_data = data_utils.read_data()
@@ -160,7 +214,7 @@ if __name__ == "__main__":
     print(test_data.head())
     print(test_data.shape)
     # (
-    #     df_componenet,
+    #     df_Components,
     #     df_DeliveryandCustomerSupport,
     #     df_DesignandAesthetics,
     #     df_Dimensions,

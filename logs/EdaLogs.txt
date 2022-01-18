@@ -1,0 +1,4 @@
+2022-01-18/13:12:44		In check_class_distributions method in EDA class: checking class distributions
+2022-01-18/13:12:45		In cross_tabulation method in EDA class: cross tabulation
+2022-01-18/13:12:57		In basic_data_exploration method in EDA class: showing basic data exploration
+2022-01-18/13:12:57		In check_missing_values method in EDA class: checking missing values
