@@ -1,0 +1,34 @@
+2022-01-18/17:13:10		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/17:13:15		In extract_features_most_similar_words method In Vectorization class: Error in adding similar word features: [Errno 22] Invalid argument: 'D:\\ML_Projects\\MultiClassClassification\\Sentiments-2.0-Decode-Code-Words\\saved_model\x0bectorizer_similarFeatures.pkl'
+2022-01-18/17:18:17		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/17:18:21		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/17:21:33		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/18:46:27		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/18:46:32		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/18:49:55		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/19:00:23		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/19:00:29		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/19:03:22		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/20:19:42		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/20:19:47		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/20:22:44		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/20:38:12		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/20:38:17		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/20:41:37		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/20:46:45		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/20:46:50		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/20:50:53		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/20:51:03		In reduce_features method in Vectorization class: started reducing features
+2022-01-18/20:51:03		In reduce_features method in Vectorization class: Error in feature reduction: Input contains NaN, infinity or a value too large for dtype('float64').
+2022-01-18/21:09:10		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/21:09:14		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/21:12:30		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/21:12:38		In reduce_features method in Vectorization class: started reducing features
+2022-01-18/22:55:26		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/22:55:35		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/23:00:14		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/23:01:37		In reduce_features method in Vectorization class: started reducing features
+2022-01-18/23:35:04		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-18/23:35:10		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-18/23:38:59		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-18/23:39:07		In reduce_features method in Vectorization class: started reducing features
