@@ -116,3 +116,98 @@
 2022-01-18/23:34:48		In add_features method in FeatureEngineering class: features added successfully
 2022-01-18/23:34:48		In train_a_gensim_model method in FeatureEngineering class: train a gensim model
 2022-01-18/23:34:48		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-24/14:14:21		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-24/14:14:21		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-24/14:14:21		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-24/14:14:21		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-24/14:14:21		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-24/14:14:22		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-24/14:14:22		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-24/14:14:25		In add_features method in FeatureEngineering class: features added successfully
+2022-01-24/14:14:25		In train_a_gensim_model method in FeatureEngineering class: train a gensim model
+2022-01-24/14:14:26		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-24/14:21:03		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-24/14:21:03		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-24/14:21:03		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-24/14:21:03		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-24/14:21:03		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-24/14:21:03		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-24/14:21:04		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-24/14:21:07		In add_features method in FeatureEngineering class: features added successfully
+2022-01-24/14:21:07		In train_a_gensim_model method in FeatureEngineering class: train a gensim model
+2022-01-24/14:21:07		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-24/14:34:17		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-24/14:34:17		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-24/14:34:17		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-24/14:34:17		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-24/14:34:17		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-24/14:34:17		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-24/14:34:18		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-24/14:34:21		In add_features method in FeatureEngineering class: features added successfully
+2022-01-24/14:34:21		In train_a_gensim_model method in FeatureEngineering class: train a gensim model
+2022-01-24/14:34:21		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/13:00:25		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/13:00:25		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/13:00:25		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/13:00:25		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/13:00:25		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/13:00:25		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/13:00:25		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/13:00:25		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/13:00:25		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/13:03:08		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/13:03:08		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/13:03:08		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/13:03:08		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/13:03:08		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/13:03:08		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/13:03:08		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/13:03:08		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/13:03:08		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/13:42:40		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/13:42:40		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/13:42:40		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/13:42:40		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/13:42:40		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/13:42:40		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/13:42:40		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/13:42:40		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/13:42:40		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/14:17:22		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/14:17:22		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/14:17:22		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/14:17:23		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/14:17:23		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/14:17:23		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/14:17:23		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/14:17:26		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/14:17:26		In train_a_gensim_model method in FeatureEngineering class: train a gensim model
+2022-01-25/14:17:27		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/15:14:50		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/15:14:50		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/15:14:50		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/15:14:50		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/15:14:50		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/15:14:50		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/15:14:50		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/15:14:50		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/15:14:50		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/15:42:10		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/15:42:10		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/15:42:10		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/15:42:10		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/15:42:11		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/15:42:11		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/15:42:11		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/15:42:14		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/15:42:14		In train_a_gensim_model method in FeatureEngineering class: train a gensim model
+2022-01-25/15:42:15		In make_acolumn method in FeatureEngineering class: making new column for similar words
+2022-01-25/16:01:55		In add_features method in FeatureEngineering class: started adding feature in dataset
+2022-01-25/16:01:55		In get_count_of_words method in FeatureEngineering class: Get count of words in data
+2022-01-25/16:01:55		In get_count_of_sentences method in FeatureEngineering class: Get count of sentences in data
+2022-01-25/16:01:55		In get_average_word_length method in FeatureEngineering class: Get average word length in data
+2022-01-25/16:01:55		In get_average_sentence_length method in FeatureEngineering class: Get average sentence length in data
+2022-01-25/16:01:55		In get_average_sentence_complexity method in FeatureEngineering class: Get average sentence complaxity in data
+2022-01-25/16:01:55		In get_average_word_complexity method in FeatureEngineering class: Get average word complaxity in data
+2022-01-25/16:01:55		In add_features method in FeatureEngineering class: features added successfully
+2022-01-25/16:02:01		In make_acolumn method in FeatureEngineering class: making new column for similar words

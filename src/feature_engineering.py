@@ -253,39 +253,37 @@ class Vectorization:
     #     # save the vectorizer to disk
     #     joblib.dump(vectorizer, "vectorizer.pkl")
     #     return Final_Training_data, Final_Test
+    
+    def averaged_word2vec_vectorizer(self, corpus, model, num_features):
+        vocabulary = set(model.wv.index_to_key)
 
+        def average_word_vectors(words, model, vocabulary, num_features):
+            feature_vector = np.zeros((num_features,), dtype="float64")
+            nwords = 0.
+
+            for word in words:
+                if word in vocabulary:
+                    nwords = nwords + 1.
+                    feature_vector = np.add(feature_vector, model.wv[word])
+            if nwords:
+                feature_vector = np.divide(feature_vector, nwords)
+
+            return feature_vector
+        features = [average_word_vectors(tokenized_sentence, model, vocabulary, num_features)
+                    for tokenized_sentence in corpus]
+        return np.array(features)
+    
     def fast_text_extract_features(self):
         self.logging.log(
             self.file_object,
             "In fast_text_extract_features method In Vectorization class: adding fast-text features"
         )
         try:
-            def averaged_word2vec_vectorizer(corpus, model, num_features):
-                vocabulary = set(model.wv.index_to_key)
-
-                def average_word_vectors(words, model, vocabulary, num_features):
-                    feature_vector = np.zeros((num_features,), dtype="float64")
-                    nwords = 0.
-
-                    for word in words:
-                        if word in vocabulary:
-                            nwords = nwords + 1.
-                            feature_vector = np.add(feature_vector, model.wv[word])
-                    if nwords:
-                        feature_vector = np.divide(feature_vector, nwords)
-
-                    return feature_vector
-                features = [average_word_vectors(tokenized_sentence, model, vocabulary, num_features)
-                            for tokenized_sentence in corpus]
-                return np.array(features)
-
-            # ft_model = FastText.load("ft_model")
-
             tokenized_docs_train = [doc.split()
                                     for doc in list(self.train_data['Review'])]
             ft_model = FastText(tokenized_docs_train, min_count=2,
                                 vector_size=300, workers=4, window=40, sg=1, epochs=100)
-            doc_vecs_ft_train = averaged_word2vec_vectorizer(
+            doc_vecs_ft_train = self.averaged_word2vec_vectorizer(
                 tokenized_docs_train, ft_model, 300)
             doc_vecs_ft_train = pd.DataFrame(doc_vecs_ft_train)
 
@@ -294,7 +292,7 @@ class Vectorization:
             # doc_vecs_ft_test = averaged_word2vec_vectorizer(
             #     tokenized_docs_test, ft_model, 300)
             # doc_vecs_ft_test = pd.DataFrame(doc_vecs_ft_test)
-            ft_model.save("ft_model.model")
+            # ft_model.save("ft_model.model")
 
             self.logging.log(
                 self.file_object,
@@ -375,12 +373,12 @@ class Vectorization:
             "In reduce_features method in Vectorization class: started reducing features"
         )
         try:
-            filename = 'svd.sav'
+            #filename = 'svd.sav'
             #svd = joblib.load(filename)
             svd = TruncatedSVD(n_components=20, n_iter=7, random_state=42)
             tuncated_train_data = svd.fit_transform(train_data)
             tuncated_train_data=pd.DataFrame(tuncated_train_data)
-            #joblib.dump(svd, filename)
+            joblib.dump(svd, "D:\ML_Projects\MultiClassClassification\Sentiments-2.0-Decode-Code-Words\saved_model\SVD.sav")
             return tuncated_train_data
             
         except Exception as e:

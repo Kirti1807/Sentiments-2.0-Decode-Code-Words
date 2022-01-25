@@ -34,3 +34,31 @@
 2022-01-18/23:34:41		In read_data method in DataUtils class : Data read successfully
 2022-01-18/23:39:08		In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset
 2022-01-18/23:39:10		In divide_data_in_divisions method in DataUtils class: Completed data divison
+2022-01-24/14:14:19		In read_data method in DataUtils class : Started data loading
+2022-01-24/14:14:19		In read_data method in DataUtils class : Data read successfully
+2022-01-24/14:18:05		In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset
+2022-01-24/14:18:08		In divide_data_in_divisions method in DataUtils class: Completed data divison
+2022-01-24/14:24:49		In load_different_divisions_data method in DataUtils class: started loading 12 datasets
+2022-01-24/14:24:49		In load_different_divisions_data method in DataUtils class: Completed loading 12 datasets
+2022-01-24/14:21:01		In read_data method in DataUtils class : Started data loading
+2022-01-24/14:21:01		In read_data method in DataUtils class : Data read successfully
+2022-01-24/14:24:47		In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset
+2022-01-24/14:24:49		In divide_data_in_divisions method in DataUtils class: Completed data divison
+2022-01-24/14:37:34		In load_different_divisions_data method in DataUtils class: started loading 12 datasets
+2022-01-24/14:37:34		In load_different_divisions_data method in DataUtils class: Completed loading 12 datasets
+2022-01-24/14:34:15		In read_data method in DataUtils class : Started data loading
+2022-01-24/14:34:15		In read_data method in DataUtils class : Data read successfully
+2022-01-24/14:37:32		In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset
+2022-01-24/14:37:34		In divide_data_in_divisions method in DataUtils class: Completed data divison
+2022-01-25/14:20:34		In load_different_divisions_data method in DataUtils class: started loading 12 datasets
+2022-01-25/14:20:34		In load_different_divisions_data method in DataUtils class: Completed loading 12 datasets
+2022-01-25/14:17:21		In read_data method in DataUtils class : Started data loading
+2022-01-25/14:17:21		In read_data method in DataUtils class : Data read successfully
+2022-01-25/14:20:32		In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset
+2022-01-25/14:20:34		In divide_data_in_divisions method in DataUtils class: Completed data divison
+2022-01-25/15:46:12		In load_different_divisions_data method in DataUtils class: started loading 12 datasets
+2022-01-25/15:46:13		In load_different_divisions_data method in DataUtils class: Completed loading 12 datasets
+2022-01-25/15:42:08		In read_data method in DataUtils class : Started data loading
+2022-01-25/15:42:08		In read_data method in DataUtils class : Data read successfully
+2022-01-25/15:46:10		In divide_data_in_divisions method in DataUtils class: started data divison into 12 dataset
+2022-01-25/15:46:12		In divide_data_in_divisions method in DataUtils class: Completed data divison

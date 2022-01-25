@@ -1,0 +1,8 @@
+2022-01-24/14:24:49		In getting_trained_model method in TrainedModel class: starting the training of models
+2022-01-24/14:24:50		In getting_trained_model method in TrainedModel class: Successfully completed model training
+2022-01-24/14:37:34		In getting_trained_model method in TrainedModel class: starting the training of models
+2022-01-24/15:06:25		In getting_trained_model method in TrainedModel class: Successfully completed model training
+2022-01-25/14:20:34		In getting_trained_model method in TrainedModel class: starting the training of models
+2022-01-25/14:41:50		In getting_trained_model method in TrainedModel class: Successfully completed model training
+2022-01-25/15:46:12		In getting_trained_model method in TrainedModel class: starting the training of models
+2022-01-25/15:52:21		In getting_trained_model method in TrainedModel class: Successfully completed model training

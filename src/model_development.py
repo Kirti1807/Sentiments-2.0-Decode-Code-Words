@@ -23,7 +23,7 @@ from xgboost import XGBClassifier
 # import lightgbm as lgb
 
 class MLHyperparameterOpt:
-    def __init__(self, x_train, x_test, y_train, y_test) -> None:
+    def __init__(self, x_train, y_train, x_test, y_test) -> None:
         self.x_train = x_train
         self.x_test = x_test
         self.y_train = y_train
@@ -136,35 +136,36 @@ class TrainMLModel:
 
     def decision_trees(self, fine_tuning=True):
         logging.info("Entered for training Decision Trees model")
-        if fine_tuning:
-            hyper_opt = MLHyperparameterOpt(
-                    self.x_train, self.y_train, self.x_test, self.y_test
+        try:
+            if fine_tuning:
+                hyper_opt = MLHyperparameterOpt(
+                        self.x_train, self.y_train, self.x_test, self.y_test
+                    )
+                study = optuna.create_study(direction="maximize")
+                study.optimize(hyper_opt.optimize_decisiontrees, n_trials=100)
+                trial = study.best_trial
+                criterion = trial.params["criterion"]
+                max_depth = trial.params["max_depth"]
+                min_samples_split = trial.params["min_samples_split"]
+                print("Best parameters : ", trial.params)
+                clf = DecisionTreeClassifier(
+                        criterion=criterion,
+                        max_depth=max_depth,
+                        min_samples_split=min_samples_split,
                 )
-            study = optuna.create_study(direction="maximize")
-            study.optimize(hyper_opt.optimize_decisiontrees, n_trials=100)
-            trial = study.best_trial
-            criterion = trial.params["criterion"]
-            max_depth = trial.params["max_depth"]
-            min_samples_split = trial.params["min_samples_split"]
-            print("Best parameters : ", trial.params)
-            clf = DecisionTreeClassifier(
-                    criterion=criterion,
-                    max_depth=max_depth,
-                    min_samples_split=min_samples_split,
-            )
-            clf.fit(self.x_train, self.y_train)
-            return clf
-        else:
-            model = DecisionTreeClassifier(
-                    criterion="entropy", max_depth=1, min_samples_split=7
-            )
+                clf.fit(self.x_train, self.y_train)
+                return clf
+            else:
+                model = DecisionTreeClassifier(
+                        criterion="entropy", max_depth=1, min_samples_split=7
+                )
 
-            model.fit(self.x_train, self.y_train)
-            return model
-        # except Exception as e:
-        #     logging.error("Error in training Decision Trees model")
-        #     logging.error(e)
-        #     return None
+                model.fit(self.x_train, self.y_train)
+                return model
+        except Exception as e:
+            logging.error("Error in training Decision Trees model")
+            logging.error(e)
+            return None
 
     def random_forest(self, fine_tuning=True):
         logging.info("Entered for training Random Forest model")

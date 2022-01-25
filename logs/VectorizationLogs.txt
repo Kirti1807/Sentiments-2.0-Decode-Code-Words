@@ -32,3 +32,23 @@
 2022-01-18/23:35:10		In fast_text_extract_features method In Vectorization class: adding fast-text features
 2022-01-18/23:38:59		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
 2022-01-18/23:39:07		In reduce_features method in Vectorization class: started reducing features
+2022-01-24/14:14:36		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-24/14:14:41		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-24/14:17:57		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-24/14:18:05		In reduce_features method in Vectorization class: started reducing features
+2022-01-24/14:21:19		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-24/14:21:23		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-24/14:24:40		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-24/14:24:46		In reduce_features method in Vectorization class: started reducing features
+2022-01-24/14:34:31		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-24/14:34:35		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-24/14:37:26		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-24/14:37:32		In reduce_features method in Vectorization class: started reducing features
+2022-01-25/14:17:37		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-25/14:17:41		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-25/14:20:25		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-25/14:20:31		In reduce_features method in Vectorization class: started reducing features
+2022-01-25/15:42:25		In extract_features_most_similar_words method In Vectorization class: starting adding most similar word features
+2022-01-25/15:42:30		In fast_text_extract_features method In Vectorization class: adding fast-text features
+2022-01-25/15:46:03		In fast_text_extract_features method In Vectorization class: successfully added fast-text features
+2022-01-25/15:46:09		In reduce_features method in Vectorization class: started reducing features
